@@ -33,3 +33,580 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ================================
+   FEEDBACK PAGE - RESPONSIVE STYLES
+================================ */
+
+.feedback-section {
+  width: 100%;
+  min-height: 80vh;
+  min-height: 80svh;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 4vw, 2rem);
+  box-sizing: border-box;
+}
+
+.feedback-card {
+  width: 100%;
+  max-width: 36rem;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  animation: feedbackEnter 0.8s ease-out both;
+  transform-origin: center;
+}
+
+.feedback-card input,
+.feedback-card textarea,
+.feedback-card button {
+  box-sizing: border-box;
+  max-width: 100%;
+  font: inherit;
+}
+
+.feedback-card input,
+.feedback-card textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  font-size: 16px;
+}
+
+/* Prevent iOS Safari from zooming into inputs:
+   16px minimum font size */
+
+/* Smooth focus and hover effects */
+.feedback-input {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.feedback-input:focus-visible {
+  outline: 2px solid #C47752;
+  outline-offset: 2px;
+}
+
+.feedback-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 48px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.feedback-button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .feedback-input:hover {
+    border-color: #C47752;
+  }
+
+  .feedback-button:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Entrance animation */
+@keyframes feedbackEnter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Small mobile phones: 320px–480px */
+@media (max-width: 480px) {
+  .feedback-section {
+    min-height: auto;
+    padding: 1.5rem 0.875rem 2.5rem;
+  }
+
+  .feedback-card {
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+  }
+
+  .feedback-card h2 {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .feedback-card p {
+    overflow-wrap: anywhere;
+  }
+
+  .feedback-card form {
+    gap: 1rem;
+  }
+
+  .feedback-card input,
+  .feedback-card textarea {
+    padding: 0.8rem 0.875rem;
+  }
+
+  .feedback-button {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.8rem 1rem;
+  }
+}
+
+/* Very narrow screens */
+@media (max-width: 360px) {
+  .feedback-section {
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+  }
+
+  .feedback-card {
+    padding: 1rem;
+  }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .feedback-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .feedback-card {
+    max-width: 34rem;
+  }
+}
+
+/* Desktop and laptops */
+@media (min-width: 1025px) {
+  .feedback-section {
+    padding: 4rem 2rem;
+  }
+
+  .feedback-card {
+    max-width: 36rem;
+  }
+}
+
+/* Accessibility: respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .feedback-card {
+    animation: none;
+  }
+
+  .feedback-input,
+  .feedback-button,
+  .feedback-button::after {
+    transition: none;
+  }
+}
+
+
+/* =========================================
+   ABOUT PAGE ANIMATIONS
+   Navbar styles intentionally untouched
+========================================= */
+
+/* Reveal content when it enters the viewport */
+.about-animation-page .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 650ms ease-out,
+    transform 650ms ease-out;
+  will-change: opacity, transform;
+}
+
+.about-animation-page .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero-style entrance for the first About card */
+.about-animation-page
+  .about-content-card.reveal.is-visible {
+  animation: aboutCardEnter 700ms ease-out both;
+}
+
+/* Screening and process cards */
+.about-animation-page .about-tool-card,
+.about-animation-page .about-step-card {
+  transition:
+    opacity 650ms ease-out,
+    transform 300ms ease,
+    box-shadow 300ms ease;
+}
+
+/* Stagger the process cards slightly */
+.about-animation-page .about-step-card:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.about-animation-page .about-step-card:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+.about-animation-page .about-step-card:nth-child(4) {
+  transition-delay: 240ms;
+}
+
+/* Hover effects only on devices that support a mouse */
+@media (hover: hover) and (pointer: fine) {
+  .about-animation-page .about-tool-card:hover,
+  .about-animation-page .about-step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 28px rgb(41 37 36 / 10%);
+  }
+}
+
+@keyframes aboutCardEnter {
+  from {
+    opacity: 0.6;
+    transform: translateY(12px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile: smaller movement, smoother scrolling */
+@media (max-width: 600px) {
+  .about-animation-page .reveal {
+    transform: translateY(16px);
+    transition-duration: 500ms;
+    will-change: auto;
+  }
+
+  .about-animation-page .reveal.is-visible {
+    transform: translateY(0);
+  }
+
+  .about-animation-page .about-tool-card,
+  .about-animation-page .about-step-card {
+    transition-duration: 250ms;
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .about-animation-page .reveal {
+    transform: translateY(20px);
+  }
+
+  .about-animation-page .reveal.is-visible {
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .about-animation-page .reveal,
+  .about-animation-page .reveal.is-visible,
+  .about-animation-page .about-content-card,
+  .about-animation-page .about-tool-card,
+  .about-animation-page .about-step-card {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto;
+  }
+}
+
+/* Donation section background animation */
+.donation-coming-soon {
+  background-size: 200% 200%;
+  animation: donationBackground 8s ease infinite;
+}
+
+/* Soft glowing background */
+.donation-coming-soon::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: clamp(150px, 35vw, 320px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: donationGlow 5s ease-in-out infinite alternate;
+}
+
+/* Heading entrance and glow */
+.donation-title {
+  animation:
+    donationTitleEnter 1s ease-out both,
+}
+
+@keyframes donationBackground {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes donationTitleEnter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+
+/* Accessibility: respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .donation-coming-soon,
+  .donation-coming-soon::before,
+  .donation-title {
+    animation: none !important;
+  }
+
+  .donation-title {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* Ease-In assessment animations */
+
+/* Page and question entrance */
+.question-enter {
+  animation: questionEnter 420ms ease-out both;
+}
+
+@keyframes questionEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth progress bar */
+.progress-fill {
+  transition: width 450ms ease-in-out;
+}
+
+/* Answer option hover and selection */
+.answer-option {
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.answer-option:active {
+  transform: scale(0.99);
+}
+
+.answer-selected {
+  animation: answerSelect 220ms ease-out;
+}
+
+@keyframes answerSelect {
+  from {
+    transform: scale(0.985);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Results entrance */
+.result-enter {
+  animation: questionEnter 500ms ease-out both;
+}
+
+.result-card {
+  animation: resultCardEnter 500ms ease-out both;
+}
+
+.result-card:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+@keyframes resultCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects only on devices with a real hover pointer */
+@media (hover: hover) and (pointer: fine) {
+  .answer-option:hover:not(.answer-selected) {
+    transform: translateY(-1px);
+  }
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .question-enter {
+    animation-duration: 300ms;
+  }
+
+  .answer-option:active {
+    transform: scale(0.99);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .question-enter,
+  .result-enter,
+  .result-card,
+  .answer-selected {
+    animation: none !important;
+  }
+
+  .progress-fill,
+  .answer-option {
+    transition: none !important;
+  }
+
+  .answer-option:active {
+    transform: none;
+  }
+}
+/* Ease-In Questions page animations */
+
+/* Smooth entrance for the page heading and current question */
+.question-enter {
+  animation: questionEnter 420ms ease-out both;
+}
+
+@keyframes questionEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Overall questionnaire progress */
+.progress-fill {
+  transition: width 450ms ease-in-out;
+}
+
+/* Animated score bars on the result cards */
+.score-fill {
+  transition: width 750ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Answer option hover/tap feedback */
+.answer-option {
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.answer-option:active {
+  transform: scale(0.99);
+}
+
+.answer-selected {
+  animation: answerSelect 220ms ease-out;
+}
+
+@keyframes answerSelect {
+  from { transform: scale(0.985); }
+  to { transform: scale(1); }
+}
+
+/* Results heading and cards */
+.result-enter {
+  animation: questionEnter 500ms ease-out both;
+}
+
+.result-card {
+  animation: resultCardEnter 500ms ease-out both;
+}
+
+/* Stagger only the two scorecards; the following advice card enters after them */
+.grid > .result-card:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+@keyframes resultCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover motion only for devices that actually support hover */
+@media (hover: hover) and (pointer: fine) {
+  .answer-option:hover:not(.answer-selected) {
+    transform: translateY(-1px);
+  }
+}
+
+/* Smaller screens: keep transitions subtle and fast */
+@media (max-width: 480px) {
+  .question-enter {
+    animation-duration: 300ms;
+  }
+
+  .answer-option:active {
+    transform: scale(0.99);
+  }
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .question-enter,
+  .result-enter,
+  .result-card,
+  .answer-selected {
+    animation: none !important;
+  }
+
+  .progress-fill,
+  .score-fill,
+  .answer-option {
+    transition: none !important;
+  }
+
+  .answer-option:active,
+  .answer-option:hover:not(.answer-selected) {
+    transform: none;
+  }
+}
