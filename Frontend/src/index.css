@@ -610,3 +610,270 @@ body {
     transform: none;
   }
 }
+
+
+/* ==========================================
+   EASE-IN - COMMUNITY FEEDBACK CARDS
+   Add this at the end of index.css
+========================================== */
+
+.feedback-list-grid {
+  align-items: stretch;
+}
+
+.feedback-display-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  animation: communityFeedbackEnter 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+
+@keyframes communityFeedbackEnter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover animation only on mouse/trackpad devices */
+@media (hover: hover) and (pointer: fine) {
+  .feedback-display-card:hover {
+    transform: translateY(-4px);
+    border-color: #C47752;
+    box-shadow: 0 14px 28px rgb(41 37 36 / 12%);
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  #feedback-list {
+    padding-top: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .feedback-display-card {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+}
+
+/* Respect accessibility preferences */
+@media (prefers-reduced-motion: reduce) {
+  .feedback-display-card {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .feedback-display-card:hover {
+    transform: none;
+  }
+}
+
+/* =========================================
+   EASE-IN FEEDBACK MARQUEE
+   Responsive: phones, tablets and desktops
+========================================= */
+
+.feedback-marquee {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0.75rem 0;
+  isolation: isolate;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 3%,
+    black 97%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 3%,
+    black 97%,
+    transparent
+  );
+}
+
+.feedback-marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.feedback-marquee-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: stretch;
+  gap: 1rem;
+  padding-right: 1rem;
+}
+
+.feedback-marquee-track.is-animated {
+  animation: feedbackMarquee 35s linear infinite;
+  will-change: transform;
+}
+
+/* Fixed card width prevents cards from squeezing together */
+.feedback-display-card {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 clamp(250px, 28vw, 340px);
+  flex-direction: column;
+  min-width: 0;
+  max-width: 340px;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  border: 1px solid rgb(217 161 122 / 55%);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 80%);
+  padding: clamp(1rem, 2vw, 1.35rem);
+  box-shadow: 0 6px 18px rgb(41 37 36 / 8%);
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+
+@keyframes feedbackMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause animation while interacting with cards */
+@media (hover: hover) and (pointer: fine) {
+  .feedback-marquee:hover .feedback-marquee-track.is-animated,
+  .feedback-marquee:focus-within .feedback-marquee-track.is-animated {
+    animation-play-state: paused;
+  }
+
+  .feedback-display-card:hover {
+    transform: translateY(-4px);
+    border-color: #C47752;
+    box-shadow: 0 14px 28px rgb(41 37 36 / 12%);
+  }
+}
+
+/* Touch devices and small phones */
+@media (max-width: 480px) {
+  .feedback-marquee {
+    padding: 0.5rem 0;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 1.5%,
+      black 98.5%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 1.5%,
+      black 98.5%,
+      transparent
+    );
+  }
+
+  .feedback-marquee-track,
+  .feedback-marquee-group {
+    gap: 0.75rem;
+  }
+
+  .feedback-marquee-group {
+    padding-right: 0.75rem;
+  }
+
+  .feedback-display-card {
+    flex-basis: min(78vw, 290px);
+    width: min(78vw, 290px);
+    max-width: 290px;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .feedback-marquee-track.is-animated {
+    animation-duration: 40s;
+  }
+
+  .feedback-display-card {
+    flex-basis: clamp(270px, 40vw, 320px);
+  }
+}
+
+/* Large screens */
+@media (min-width: 1025px) {
+  .feedback-marquee-track.is-animated {
+    animation-duration: 45s;
+  }
+}
+
+/* Respect accessibility settings */
+@media (prefers-reduced-motion: reduce) {
+  .feedback-marquee {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .feedback-marquee-track.is-animated {
+    animation: none !important;
+    transform: none;
+    will-change: auto;
+  }
+
+  .feedback-marquee-group[aria-hidden="true"] {
+    display: none;
+  }
+
+  .feedback-display-card {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+@theme {
+  --animate-slide-next: slide-next 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-slide-prev: slide-prev 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-pop: pop 0.25s ease-out;
+  --animate-fade-up: fade-up 0.5s ease-out both;
+
+  @keyframes slide-next {
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes slide-prev {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes pop {
+    0%   { transform: scale(0.97); }
+    60%  { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+  }
+}
