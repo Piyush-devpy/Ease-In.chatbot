@@ -375,7 +375,7 @@ Contributions and suggestions are welcome.
 
 ## License
 
-A license has not been specified here. Add a `LICENSE` file and update this section before distributing the project under an open-source license.
+This project is licensed under the MIT License. See the LICENSE file for details..
 
 ---
 
