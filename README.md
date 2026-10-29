@@ -126,11 +126,10 @@ Install the following software:
 ### 1. Clone the Repository
 
 ```bash
-git clone <YOUR_REPOSITORY_URL>
+git clone https://github.com/Piyush-devpy/Ease-In.chatbot
 cd Ease-In
 ```
 
-Replace `<YOUR_REPOSITORY_URL>` with your Git repository URL.
 
 ### 2. Set Up the Flask Backend
 
