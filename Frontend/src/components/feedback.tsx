@@ -215,7 +215,7 @@ function Feedback() {
           <li>
             <Link
               to="/questions"
-              className="inline-block rounded-xl border-2 border-[#D9A17A] px-5 py-2 font-semibold text-[#F5E6CC] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#D9A17A] hover:text-[#292524] hover:shadow-md"
+              className="inline-block rounded-xl border-2 border-[#D9A17A] px-5 py-2 font-semibold text-[#F5E6CC] transition-all duration-300 hover:bg-[#D9A17A] hover:text-[#292524] hover:shadow-md hover:-translate-y-0.5"
               onClick={() => {
                 setTimeout(() => {
                   document
