@@ -5,7 +5,7 @@ import CursorBrain from "./components/Cursorbrain";
 function Home(){
     return(
      <>
-        <nav className="mx-8 mt-4 flex items-center justify-between rounded-2xl bg-[#292524] px-8 py-4 shadow-lg">
+        <nav className="mx-3 mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#292524] px-4 py-4 shadow-lg sm:mx-8 sm:px-8">
 
         <Link to="/" className="flex shrink-0 items-center gap-2">
             <img className="h-8 w-8 shrink-0 object-contain hidden md:block" src="./artificial-intelligence.webp" alt="logo.png"></img>
