@@ -7,12 +7,11 @@ from flask import Blueprint, jsonify
 
 load_dotenv()
 
-# Blueprint for database-related utility endpoints
 db_bp = Blueprint("db", __name__)
 
 
 def get_db_connection():
-    """Create and return a MySQL database connection."""
+    """Create a secure MySQL database connection."""
     return mysql.connector.connect(
         host=os.getenv("DB_HOST"),
         port=int(os.getenv("DB_PORT", "3306")),
@@ -25,10 +24,7 @@ def get_db_connection():
 
 
 def ensure_feedback_table(connection=None):
-    """
-    Create the feedback table if it does not exist.
-    Existing feedback tables and their records are preserved.
-    """
+    """Create the feedback table if it does not exist."""
     own_connection = connection is None
     conn = connection or get_db_connection()
     cursor = None
@@ -57,20 +53,74 @@ def ensure_feedback_table(connection=None):
             conn.close()
 
 
+def save_feedback(name, email, message):
+    """
+    Remove an existing record with the same email and message,
+    then insert the latest submission.
+
+    Different feedback from the same email is allowed.
+    """
+    name = name.strip()
+    email = email.strip()
+    message = message.strip()
+
+    if not name or not email or not message:
+        raise ValueError("Name, email, and feedback are required.")
+
+    connection = get_db_connection()
+    cursor = None
+
+    try:
+        cursor = connection.cursor()
+        connection.start_transaction()
+
+        # Delete matching feedback for this email.
+        cursor.execute(
+            """
+            DELETE FROM feedback
+            WHERE LOWER(TRIM(email)) = LOWER(%s)
+              AND BINARY TRIM(message) = BINARY %s
+            """,
+            (email, message),
+        )
+
+        # Insert the latest submission.
+        cursor.execute(
+            """
+            INSERT INTO feedback (name, email, message)
+            VALUES (%s, %s, %s)
+            """,
+            (name, email, message),
+        )
+
+        new_id = cursor.lastrowid
+        connection.commit()
+
+        return new_id
+
+    except Exception:
+        connection.rollback()
+        raise
+
+    finally:
+        if cursor is not None:
+            cursor.close()
+
+        connection.close()
+
+
 def reset_feedback_table():
-    """
-    Delete all feedback records but preserve the table structure.
-    Use only with test data.
-    """
+    """Delete all feedback records. Use only for test data."""
     connection = get_db_connection()
     cursor = None
 
     try:
         cursor = connection.cursor()
         cursor.execute("DELETE FROM feedback")
+        deleted_count = cursor.rowcount
         connection.commit()
 
-        return cursor.rowcount
+        return deleted_count
 
     except Error:
         connection.rollback()
@@ -79,16 +129,16 @@ def reset_feedback_table():
     finally:
         if cursor is not None:
             cursor.close()
+
         connection.close()
 
 
 @db_bp.post("/api/testing/reset-feedback")
 def reset_feedback_endpoint():
-    """
-    Testing-only endpoint. Disabled unless explicitly enabled
-    in the environment configuration.
-    """
-    enabled = os.getenv("ENABLE_TEST_RESET", "false").lower() == "true"
+    """Testing-only endpoint, disabled unless explicitly enabled."""
+    enabled = (
+        os.getenv("ENABLE_TEST_RESET", "false").lower() == "true"
+    )
 
     if not enabled:
         return jsonify({
@@ -100,7 +150,7 @@ def reset_feedback_endpoint():
 
         return jsonify({
             "message": "Feedback test data cleared.",
-            "deleted_records": deleted_count
+            "deleted_records": deleted_count,
         }), 200
 
     except Error:
