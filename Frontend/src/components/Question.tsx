@@ -467,7 +467,8 @@ export default function Questions() {
               )}
 
               <div className="animate-fade-up">
-                <div className="mb-2 flex items-center gap-2">img src={brainLogo} alt="brain-logo.png"             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5E6CC]" aria-hidden="true"/>
+                <div className="mb-2 flex items-center gap-2">
+                  <img src={brainLogo} alt="brainlogo.png" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5E6CC]" aria-hidden="true"/>
                   <span className="text-xs font-bold text-stone-500">{t.botName}</span>
                 </div>
                 <div className="chat-bubble-bot max-w-2xl rounded-2xl rounded-tl-sm bg-[#F5E6CC] p-4 sm:p-5">
