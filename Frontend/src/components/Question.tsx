@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import brainLogo from "../assets/brainlogo.png";
 
 type Language = "en" | "hi" | "es";
 type Scale = "PHQ-9" | "GAD-7";
@@ -385,9 +386,7 @@ export default function Questions() {
         {/* Header */}
         <header className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/70 bg-white/75 px-4 py-3 shadow-sm backdrop-blur sm:mb-5 sm:px-5">
           <Link to="/" className="group flex min-w-0 items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C47752]">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#292524] text-2xl shadow-sm transition-transform duration-300 group-hover:rotate-[-6deg] group-hover:scale-105 motion-reduce:transform-none" aria-hidden="true">
-              🧠
-            </span>
+            <img src={brainLogo} alt="brain-logo.png" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#292524] text-2xl shadow-sm transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105 motion-reduce:transform-none" aria-hidden="true"/>
             <span className="min-w-0">
               <span className="block truncate text-lg font-extrabold tracking-tight sm:text-xl">{t.title}</span>
               <span className="hidden text-xs text-stone-600 sm:block">{t.subtitle}</span>
@@ -416,10 +415,11 @@ export default function Questions() {
         </header>
 
         {/* Chat window */}
-        <section className="flex min-h-[480px] flex-1 flex-col overflow-hidden rounded-[1.5rem] border border-white/80 bg-white/75 shadow-[0_18px_60px_rgba(74,45,29,0.10)] backdrop-blur sm:min-h-[560px] sm:rounded-[2rem]">
+        <section className="flex min-h-120 flex-1 flex-col overflow-hidden rounded-3xl border border-white/80 bg-white/75 shadow-[0_18px_60px_rgba(74,45,29,0.10)] backdrop-blur sm:min-h-140 sm:rounded-4xl">
           <div className="flex items-center gap-3 border-b border-[#EADCCB] bg-white/70 px-4 py-3 sm:px-6 sm:py-4">
-            <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-xl">
-              🧠
+            <div>
+              < img src={brainLogo} alt="brain-logo.png"  className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-xl"/>
+              
               <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-emerald-500" />
             </div>
             <div className="min-w-0 flex-1">
@@ -467,8 +467,7 @@ export default function Questions() {
               )}
 
               <div className="animate-fade-up">
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5E6CC]" aria-hidden="true">🧠</span>
+                <div className="mb-2 flex items-center gap-2">img src={brainLogo} alt="brain-logo.png"             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5E6CC]" aria-hidden="true"/>
                   <span className="text-xs font-bold text-stone-500">{t.botName}</span>
                 </div>
                 <div className="chat-bubble-bot max-w-2xl rounded-2xl rounded-tl-sm bg-[#F5E6CC] p-4 sm:p-5">
@@ -512,7 +511,7 @@ export default function Questions() {
           ) : payload && index === -1 ? (
             <div className="chat-scroll-area flex flex-1 flex-col overflow-y-auto p-4 sm:p-6 lg:p-8">
               <div className="mb-6 flex items-start gap-2.5 animate-fade-up sm:gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-xl" aria-hidden="true">🧠</span>
+                <img src={brainLogo} alt="brain-logo.png"  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-xl" aria-hidden="true"/>
                 <div className="max-w-[88%] sm:max-w-[80%]">
                   <p className="mb-1 ml-1 text-xs font-bold text-stone-500">{t.botName}</p>
                   <div className="chat-bubble-bot rounded-2xl rounded-tl-sm bg-[#F5E6CC] p-4 sm:p-5">
@@ -524,7 +523,7 @@ export default function Questions() {
               </div>
 
               <div className="mb-6 flex items-start gap-2.5 animate-fade-up sm:gap-3" style={{ animationDelay: "120ms" }}>
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-xl" aria-hidden="true">🧠</span>
+                <img src={brainLogo} alt="brain-logo.png"  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-xl" aria-hidden="true"/>
                 <div className="max-w-[88%] sm:max-w-[80%]">
                   <p className="mb-1 ml-1 text-xs font-bold text-stone-500">{t.botName}</p>
                   <div className="chat-bubble-bot rounded-2xl rounded-tl-sm border border-[#EADCCB] bg-white p-4">
@@ -552,7 +551,7 @@ export default function Questions() {
               <div className="chat-scroll-area flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
                 {/* Intro message */}
                 <div className="mb-5 flex items-start gap-2.5 sm:gap-3">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-lg" aria-hidden="true">🧠</span>
+                  <img src={brainLogo} alt="brain-logo.png"  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-lg" aria-hidden="true"/>
                   <div className="max-w-[88%] sm:max-w-[80%]">
                     <p className="mb-1 ml-1 text-xs font-bold text-stone-500">{t.botName}</p>
                     <div className="chat-bubble-bot rounded-2xl rounded-tl-sm bg-[#F5E6CC] px-4 py-3">
@@ -570,7 +569,7 @@ export default function Questions() {
                   return (
                     <div key={question.id} className="mb-5 space-y-3">
                       <div className="flex items-start gap-2.5 sm:gap-3">
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-lg" aria-hidden="true">🧠</span>
+                        <img src={brainLogo} alt="brain-logo.png"  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-lg" aria-hidden="true"/>
                         <div className="max-w-[88%] sm:max-w-[80%]">
                           <p className="mb-1 ml-1 text-xs font-bold text-stone-500">{t.botName}</p>
                           <div className="chat-bubble-bot rounded-2xl rounded-tl-sm border border-[#EADCCB] bg-white px-4 py-3">
@@ -595,7 +594,7 @@ export default function Questions() {
 
                 {/* Current bot question */}
                 <div key={current.id} className={`mb-5 flex items-start gap-2.5 sm:gap-3 ${direction === "next" ? "animate-chat-in" : "animate-chat-back"} motion-reduce:animate-none`}>
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-xl" aria-hidden="true">🧠</span>
+                  <img src={brainLogo} alt="brain-logo.png"  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-xl" aria-hidden="true"/>
                   <div className="max-w-[92%] sm:max-w-[85%]">
                     <p className="mb-1 ml-1 text-xs font-bold text-stone-500">{t.botName}</p>
                     <div className="chat-bubble-bot rounded-2xl rounded-tl-sm border border-[#EADCCB] bg-white p-4 shadow-sm sm:p-5">
@@ -625,12 +624,10 @@ export default function Questions() {
                     role="status"
                     aria-live="polite"
                   >
-                    <span
+                    <img src={brainLogo} alt="brain-logo.png" 
                       className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F5E6CC] text-lg"
                       aria-hidden="true"
-                    >
-                      🧠
-                    </span>
+                    />
                     <div>
                       <p className="mb-1 ml-1 text-xs font-bold text-stone-500">
                         {t.botName}
@@ -836,7 +833,7 @@ function ScoreCard({
         />
       </div>
 
-      <p className="mt-3 break-words font-bold leading-6">{data.label}</p>
+      <p className="mt-3 wrap-break-words font-bold leading-6">{data.label}</p>
       <p className="mt-2 text-xs leading-5 text-stone-500">{note}</p>
     </article>
   );
