@@ -359,7 +359,7 @@ function Feedback() {
             {errorMessage && (
               <p
                 role="alert"
-                className="mt-4 break-words text-center text-sm font-semibold text-red-700"
+                className="mt-4 wrap-break-words text-center text-sm font-semibold text-red-700"
               >
                 {errorMessage}
               </p>
@@ -419,7 +419,8 @@ function Feedback() {
                   feedbacks.length > 1 ? "is-animated" : ""
                 }`}
               >
-                {[0, 1].map((copy) => (
+                {/* FIX: Duplicate group only when multiple feedbacks exist */}
+                {(feedbacks.length > 1 ? [0, 1] : [0]).map((copy) => (
                   <div
                     key={copy}
                     className="feedback-marquee-group"
@@ -437,7 +438,7 @@ function Feedback() {
                           </div>
 
                           <div className="min-w-0 flex-1">
-                            <h3 className="break-words font-bold text-[#292524]">
+                            <h3 className="wrap-break-words font-bold text-[#292524]">
                               {item.name}
                             </h3>
 
@@ -452,7 +453,7 @@ function Feedback() {
                         </div>
 
                         {/* Feedback Text */}
-                        <p className="whitespace-pre-wrap break-words text-sm leading-7 text-[#51483F]">
+                        <p className="whitespace-pre-wrap wrap-break-words text-sm leading-7 text-[#51483F]">
                           {item.text}
                         </p>
                       </article>
